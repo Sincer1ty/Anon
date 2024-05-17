@@ -6,7 +6,7 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     public List<PanelModel> Panels;
-    private Queue<PanelInstanceModel> queue = new Queue<PanelInstanceModel>();
+    private List<PanelInstanceModel> listInstances = new List<PanelInstanceModel>();
 
     public void Show(string panelId)
     {
@@ -19,7 +19,7 @@ public class UIManager : MonoBehaviour
             
             var newInstancePanel = Instantiate(panelModel.PanelPrefab, transform);
 
-            queue.Enqueue(new PanelInstanceModel
+            listInstances.Add(new PanelInstanceModel
             {
                 PanelId = panelId,
                 PanelInstance = newInstancePanel
@@ -27,7 +27,7 @@ public class UIManager : MonoBehaviour
         }
         else
         {
-
+            Debug.LogWarning($"Trying to use panelId = {panelId}, but this is not found in Panels");
         }
     }
 }
