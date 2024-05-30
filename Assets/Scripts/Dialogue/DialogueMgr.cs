@@ -12,6 +12,9 @@ public class DialogueMgr : Singleton<DialogueMgr>
     public Image rendererDialogueWindow;
 
     private Dialogue curDialogueData ;
+    [SerializeField]
+    private float DialogueTermTime = 0.05f;
+    private WaitForSeconds WaitForSeconds;
    
 
     private int count;
@@ -27,6 +30,7 @@ public class DialogueMgr : Singleton<DialogueMgr>
         curDialogueData = new Dialogue();
         curDialogueData.listName=new List<string>();
         curDialogueData.listSentences = new List<string>();
+        WaitForSeconds = new WaitForSeconds(DialogueTermTime);
         //this.gameObject.SetActive(false);
     }
 
@@ -65,7 +69,7 @@ public class DialogueMgr : Singleton<DialogueMgr>
         {
             text.text += curDialogueData.listSentences[count][i]; // 1글자씩 출력.
 
-            yield return new WaitForSeconds(0.05f);
+            yield return WaitForSeconds;
         }
 
     }
