@@ -14,7 +14,7 @@ public class UIManager : Singleton<UIManager>
     public void Show(string panelId, PanelShowBehaviour behaviour = PanelShowBehaviour.KEEP_PREVIOUS)
     {
         PanelModel panelModel = Panels.FirstOrDefault(panel => panel.PanelId == panelId);
-        
+
         if (panelModel != null)
         {
             Debug.Log(panelModel.PanelId);
@@ -32,11 +32,11 @@ public class UIManager : Singleton<UIManager>
 
             if (instance != null)
             {
-                Debug.Log("»ý¼ºµÊ : "+instance);
+                Debug.Log("ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ : "+instance);
 
                 if(!instance.activeSelf)
                 {
-                    Debug.Log("list »ý¼º");
+                    Debug.Log("list ï¿½ï¿½ï¿½ï¿½");
                     AddInstancePanel(panelId, instance);
                 }
                 instance.SetActive(true);
