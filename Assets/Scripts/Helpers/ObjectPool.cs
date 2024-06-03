@@ -14,8 +14,12 @@ public class ObjectPool : Singleton<ObjectPool>
         var instance = pooledObjects.FirstOrDefault(obj => obj.name == objectName);
         if(instance != null)
         {
-            //pooledObjects.Remove(instance);
-            instance.SetActive(true);
+            Debug.Log("pooledObject "+instance);
+            if(!instance.activeSelf)
+            {
+                pooledObjects.Remove(instance);
+                instance.SetActive(true);
+            }
             return instance;
         }
 
@@ -24,6 +28,7 @@ public class ObjectPool : Singleton<ObjectPool>
         {
             var newInstance = Instantiate(prefab, transform);
             newInstance.name = objectName;
+            pooledObjects.Add(prefab);
             return newInstance;
         }
 

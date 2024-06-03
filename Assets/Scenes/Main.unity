@@ -176,7 +176,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelId: Panel_Nickname
-  Behaviour: 0
+  Behaviour: 1
 --- !u!114 &95936169
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1024,7 +1024,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PanelId: Panel_Setting
-  Behaviour: 0
+  Behaviour: 1
 --- !u!1 &1351426852
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,7 +1037,6 @@ GameObject:
   - component: {fileID: 1351426855}
   - component: {fileID: 1351426854}
   - component: {fileID: 1351426853}
-  - component: {fileID: 1351426857}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -1131,18 +1130,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1351426857
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1351426852}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9cbb84bb5a54d644bcce99c1211f12e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1692007351
 GameObject:
   m_ObjectHideFlags: 0
@@ -1191,6 +1178,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c9cbb84bb5a54d644bcce99c1211f12e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Panels:
+  - PanelId: Panel_Setting
+    PanelPrefab: {fileID: 4605677692487742306, guid: 563b8d2010fd5f244a72bc10babe1aa8, type: 3}
+  - PanelId: Panel_Nickname
+    PanelPrefab: {fileID: 2375247960922932662, guid: 76147a1cc5c503244b21bb9a6e9315b6, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

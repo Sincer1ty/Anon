@@ -1,39 +1,54 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MyBox;
+using System.Linq;
 
 public class UIManager : Singleton<UIManager>
 {
+    public List<PanelModel> Panels;
     // showed panels list
     private List<PanelInstanceModel> listInstances = new List<PanelInstanceModel>();
-
-    private ObjectPool objectPool;
-
-    private void Start()
-    {
-        objectPool = ObjectPool.Instance;
-    }
+    // instantiated panels list
+    private List<GameObject> panelObjects = new List<GameObject>();
 
     public void Show(string panelId, PanelShowBehaviour behaviour = PanelShowBehaviour.KEEP_PREVIOUS)
     {
-        GameObject panelInstance = objectPool.GetObjectFromPool(panelId);
-
-        if(panelInstance != null)
+        PanelModel panelModel = Panels.FirstOrDefault(panel => panel.PanelId == panelId);
+        
+        if (panelModel != null)
         {
-            if(behaviour == PanelShowBehaviour.HIDE_PREVIOUS && GetAmountPanelsInList() > 0)
+            Debug.Log(panelModel.PanelId);
+
+            var instance = panelObjects.FirstOrDefault(obj => obj.name == panelId+ "(Clone)");
+
+            if (behaviour == PanelShowBehaviour.HIDE_PREVIOUS && GetAmountPanelsInList() > 0)
             {
                 var lastPanel = GetLastPanel();
-                if(lastPanel != null)
+                if (lastPanel != null)
                 {
                     lastPanel.PanelInstance.SetActive(false);
                 }
             }
 
-            listInstances.Add(new PanelInstanceModel
+            if (instance != null)
             {
-                PanelId = panelId,
-                PanelInstance = panelInstance
-            });
+                Debug.Log("持失喫 : "+instance);
+
+                if(!instance.activeSelf)
+                {
+                    Debug.Log("list 持失");
+                    AddInstancePanel(panelId, instance);
+                }
+                instance.SetActive(true);
+            }
+            else
+            {
+                var newInstancePanel = Instantiate(panelModel.PanelPrefab, transform);
+
+                AddInstancePanel(panelId, newInstancePanel);
+
+                panelObjects.Add(newInstancePanel);
+            }
         }
         else
         {
@@ -49,9 +64,9 @@ public class UIManager : Singleton<UIManager>
 
             listInstances.Remove(lastPanel);
 
-            objectPool.PoolObject(lastPanel.PanelInstance);
+            lastPanel.PanelInstance.SetActive(false);
 
-            if(GetAmountPanelsInList() > 0)
+            if (GetAmountPanelsInList() > 0)
             {
                 lastPanel = GetLastPanel();
                 if(lastPanel != null && !lastPanel.PanelInstance.activeInHierarchy)
@@ -60,6 +75,15 @@ public class UIManager : Singleton<UIManager>
                 }
             }
         }
+    }
+
+    void AddInstancePanel(string panelId, GameObject obj)
+    {
+        listInstances.Add(new PanelInstanceModel
+        {
+            PanelId = panelId,
+            PanelInstance = obj
+        });
     }
 
     PanelInstanceModel GetLastPanel()
