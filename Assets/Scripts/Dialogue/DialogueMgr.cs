@@ -6,7 +6,7 @@ using UnityEngine.UI;
 using TMPro;
 public class DialogueMgr : Singleton<DialogueMgr>
 {
-    public TextMeshProUGUI Name;
+    public TextMeshProUGUI LeftName;
     public TextMeshProUGUI RightName;
     public TextMeshProUGUI text;
     public Image rendererSprite;
@@ -26,7 +26,7 @@ public class DialogueMgr : Singleton<DialogueMgr>
     void Start()
     {
         count = 0;
-        Name.text = "";
+        LeftName.text = "";
         RightName.text = "";
         text.text = "";
         curDialogueData = new Dialogue();
@@ -56,7 +56,7 @@ public class DialogueMgr : Singleton<DialogueMgr>
     public void ExitDialogue()
     {
         text.text = "";
-        Name.text = "";
+        LeftName.text = "";
         RightName.text = "";
         count = 0;
         curDialogueData = null;
@@ -69,13 +69,13 @@ public class DialogueMgr : Singleton<DialogueMgr>
     {
         if (curDialogueData.listLocations[count]=="L")
         {
-            Name.text += curDialogueData.listName[count];
+            LeftName.text += curDialogueData.listName[count];
             RightName.text = "";
         }
         else
         {
             RightName.text += curDialogueData.listName[count];
-            Name.text = "";
+            LeftName.text = "";
         }
         
         keyActivated = true;
@@ -98,7 +98,8 @@ public class DialogueMgr : Singleton<DialogueMgr>
                 {
                     keyActivated = false;
                     count++;
-                    Name.text = "";
+                    LeftName.text = "";
+                    RightName.text = "";
                     text.text = "";
 
 
