@@ -152,7 +152,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24171677a923b914c9f859fada9801d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Name: {fileID: 393577902}
+  LeftName: {fileID: 393577902}
   RightName: {fileID: 715308900}
   text: {fileID: 912972634}
   rendererSprite: {fileID: 0}
@@ -186,7 +186,7 @@ GameObject:
   - component: {fileID: 393577903}
   - component: {fileID: 393577902}
   m_Layer: 5
-  m_Name: Name
+  m_Name: LeftName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
