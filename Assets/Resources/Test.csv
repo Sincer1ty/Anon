@@ -1,4 +1,4 @@
-Order,Name,Sentence
-1,prey,teststart
-2,jenny,test
-3,prey,testend
+Order,Name,Sentence,Location
+1,prey,teststart,L
+2,jenny,test,R
+3,prey,testend,L

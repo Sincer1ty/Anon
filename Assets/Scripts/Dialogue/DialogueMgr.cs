@@ -6,7 +6,8 @@ using UnityEngine.UI;
 using TMPro;
 public class DialogueMgr : Singleton<DialogueMgr>
 {
-    public TextMeshProUGUI Name;
+    public TextMeshProUGUI LeftName;
+    public TextMeshProUGUI RightName;
     public TextMeshProUGUI text;
     public Image rendererSprite;
     public Image rendererDialogueWindow;
@@ -25,11 +26,13 @@ public class DialogueMgr : Singleton<DialogueMgr>
     void Start()
     {
         count = 0;
-        Name.text = "";
+        LeftName.text = "";
+        RightName.text = "";
         text.text = "";
         curDialogueData = new Dialogue();
         curDialogueData.listName=new List<string>();
         curDialogueData.listSentences = new List<string>();
+        curDialogueData.listLocations = new List<string>();
         WaitForSeconds = new WaitForSeconds(DialogueTermTime);
         //this.gameObject.SetActive(false);
     }
@@ -45,6 +48,7 @@ public class DialogueMgr : Singleton<DialogueMgr>
         {
             curDialogueData.listName.Add(dialogue.listName[i]);
             curDialogueData.listSentences.Add(dialogue.listSentences[i]);
+            curDialogueData.listLocations.Add(dialogue.listLocations[i]);
         }
 
         StartCoroutine(StartDialogueCoroutine());
@@ -52,7 +56,8 @@ public class DialogueMgr : Singleton<DialogueMgr>
     public void ExitDialogue()
     {
         text.text = "";
-        Name.text = "";
+        LeftName.text = "";
+        RightName.text = "";
         count = 0;
         curDialogueData = null;
         curDialogueData = new Dialogue();
@@ -62,7 +67,16 @@ public class DialogueMgr : Singleton<DialogueMgr>
     }
     IEnumerator StartDialogueCoroutine()
     {
-        Name.text += curDialogueData.listName[count];
+        if (curDialogueData.listLocations[count]=="L")
+        {
+            LeftName.text += curDialogueData.listName[count];
+            RightName.text = "";
+        }
+        else
+        {
+            RightName.text += curDialogueData.listName[count];
+            LeftName.text = "";
+        }
         
         keyActivated = true;
         for (int i = 0; i < curDialogueData.listSentences[count].Length; i++)
@@ -84,7 +98,8 @@ public class DialogueMgr : Singleton<DialogueMgr>
                 {
                     keyActivated = false;
                     count++;
-                    Name.text = "";
+                    LeftName.text = "";
+                    RightName.text = "";
                     text.text = "";
 
 

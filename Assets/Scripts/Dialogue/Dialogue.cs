@@ -8,5 +8,6 @@ public class Dialogue
 {
     public List<string> listName;
     public List<string> listSentences;
+    public List<string> listLocations;
 }
 

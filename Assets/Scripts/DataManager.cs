@@ -35,11 +35,13 @@ public class DataManager : Singleton<DataManager>
             Dialogue dialogue = new Dialogue();
             dialogue.listName=new List<string>();
             dialogue.listSentences=new List<string>();
+            dialogue.listLocations=new List<string>();
             for (int j = 0; j < data.Count; j++)
             {
                 //Debug.Log("index " + (i).ToString() + " : " + data[i]["Starttime"] + " " + data[i]["Location"] + " " + data[i]["Kind"]);
                 dialogue.listName.Add(data[j]["Name"].ToString());
                 dialogue.listSentences.Add(data[j]["Sentence"].ToString());
+                dialogue.listLocations.Add(data[j]["Location"].ToString());
             }
             DialogueDatas[dialogueKeys[i]]= dialogue;
             DialogueCheckDictionary[dialogueKeys[i]] = false;
