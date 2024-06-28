@@ -24,7 +24,7 @@ public class UIManager : Singleton<UIManager>
             if (behaviour == PanelShowBehaviour.HIDE_PREVIOUS && GetAmountPanelsInList() > 0)
             {
                 var lastPanel = GetLastPanel();
-                if (lastPanel != null)
+                if (lastPanel != null && lastPanel.PanelInstance != instance)
                 {
                     lastPanel.PanelInstance.SetActive(false);
                 }
@@ -32,11 +32,10 @@ public class UIManager : Singleton<UIManager>
 
             if (instance != null)
             {
-                Debug.Log("������ : "+instance);
+                Debug.Log("instance : "+instance);
 
                 if(!instance.activeSelf)
                 {
-                    Debug.Log("list ����");
                     AddInstancePanel(panelId, instance);
                 }
                 instance.SetActive(true);
