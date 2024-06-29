@@ -1,3 +1,4 @@
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -6,6 +7,12 @@ using UnityEngine;
 public class Mover : MonoBehaviour, IJsonSaveable
 {
     float speed = 2.0f;
+    public List<int> list = new List<int>();
+    Dictionary<int, int> dict = new Dictionary<int, int>()
+    {
+        {1, 1},
+        {2, 2}
+    };
 
     // Update is called once per frame
     void Update()
@@ -26,12 +33,20 @@ public class Mover : MonoBehaviour, IJsonSaveable
 
     public JToken CaptureAsJToken()
     {
+        JObject state = new JObject();
+        IDictionary<string, JToken> stateDict = state;
 
-        return transform.position.ToToken();
+        stateDict["transform"] = transform.position.ToToken();
+        stateDict["dict"] = JsonConvert.SerializeObject(dict);
+        stateDict["list"] = JToken.Parse(JsonConvert.SerializeObject(list));
+
+        return state;
     }
 
     public void RestoreFromJToken(JToken state)
-    {
-        transform.position = state.ToVector3();
+    {        
+        transform.position = state["transform"].ToVector3();
+        dict = JsonConvert.DeserializeObject<Dictionary<int, int>>(state["dict"].ToString());
+        list = state["list"].ToObject<List<int>>();
     }
 }
